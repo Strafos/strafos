@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Test Extension Options</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: "Helvetica Neue",Helvetica,sans-serif;
+      font-size: 13px;
+      padding: 10px;
+      min-width: 500px;
+    }
+    textarea {
+      width: 100%;
+      font-family: monospace;
+      font-size: 12px;
+      line-height: 12px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <span><a id="ref" href="#">Custom style</a> (reader view):</span>
+  <textarea placeholder="User styles for the actual reader-view" id="reader-style" rows="15"></textarea>
+  <p></p>
+  Custom style (top frame and sidebar):
+  <textarea placeholder="User styles for top frame (sidebar mainly)" id="top-style" rows="4"></textarea>
+
+  <p></p>
+  <table>
+    <tr>
+      <td><input type="checkbox" id="new-tab"></td>
+      <td><label for="new-tab">Open links in new tabs</label></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" id="faqs"></td>
+      <td><label for="faqs"> Open FAQs page on updates</label></td>
+    </tr>
+  </table>
+  <p>
+    Rate "<b><a id="rate" href="https://chrome.google.com/webstore/detail/reader-view/ecabifbgmdmgdllomnfinbmaellmclnh/reviews" style="text-decoration: none">Reader View</a></b>" extension
+  </p>
+  <div id="explore" data-inc=50></div>
+  <p>
+    <button id="support">Support Development</button>
+    <button id="reset">Reset</button> - <button id="save">Save</button>
+    <span id="status"></span>
+  </p>
+
+  <script src="index.js"></script>
+  <script async src="explore.js"></script>
+</body>
+</html>
