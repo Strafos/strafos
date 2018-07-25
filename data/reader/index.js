@@ -11,8 +11,6 @@ var article;
   }
 }
 
-// var textarea = document.createElement("textarea");
-// textarea.value += article.content;
 var iframe = document.querySelector("iframe");
 var settings = document.querySelector("#toolbar>div");
 var styles = document.createElement("style");
