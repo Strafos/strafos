@@ -13,22 +13,47 @@ import {
   TextArea,
 } from "semantic-ui-react";
 
-class NoteDisplay extends Component {
-  state = {};
+import ReactMde, { ReactMdeTypes } from "react-mde";
+import * as Showdown from "showdown";
 
-  parseDesc = desc => {
-    const shortDesc = desc.substring(0, 200) + "...";
-    return shortDesc;
+import "react-mde/lib/styles/css/react-mde-all.css";
+
+class NoteDisplay extends Component {
+  // componentWillReceiveProps(nextProps)
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      mdeState: { markdown: props.note.content },
+    };
+    this.converter = new Showdown.Converter({
+      tables: true,
+      simplifiedAutoLink: true,
+    });
+  }
+
+  handleValueChange = mdeState => {
+    this.setState({ mdeState });
   };
 
   render() {
     const { note } = this.props;
+    console.log(this.state.mdeState);
     return (
-      <Container text>
-        <Header>{note.title}</Header>
-        <Divider />
-        <TextArea value={note.content} />
-      </Container>
+      <div>
+        <br />
+        <br />
+        <br />
+        <ReactMde
+          onChange={this.handleValueChange}
+          editorState={this.state.mdeState}
+          layout="horizontal"
+          generateMarkdownPreview={markdown =>
+            Promise.resolve(this.converter.makeHtml(markdown))
+          }
+          // generateMarkdownPreview={markdown => <div>HELoo</div>}
+        />
+      </div>
     );
   }
 }

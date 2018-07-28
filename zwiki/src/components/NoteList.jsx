@@ -33,7 +33,7 @@ class NoteList extends Component {
   render() {
     const { notes } = this.props;
     return (
-      <Container style={{ "padding-left": "10px", "padding-top": "5px" }}>
+      <Container style={{ paddingLeft: "10px", paddingTop: "5px" }}>
         <div id="scrollable-content">
           {notes.map(note => this.renderNote(note))}
         </div>

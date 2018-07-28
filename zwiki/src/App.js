@@ -114,7 +114,6 @@ class App extends Component {
 
             {/* <Grid.Column width={13}>Bar</Grid.Column> */}
             <Grid.Column width={13}>
-              {/* {selectedNote && selectedNote.content} */}
               <NoteDisplay note={selectedNote} />
             </Grid.Column>
           </Grid>
