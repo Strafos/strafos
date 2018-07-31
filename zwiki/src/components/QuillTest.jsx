@@ -35,6 +35,10 @@ class Editor extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  handleKeyPress = key => {
+    console.log(key);
+  };
+
   handleChange(content, delta, source, editor) {
     this.setState({ editorHtml: content });
   }
@@ -48,18 +52,19 @@ class Editor extends Component {
           style={{ float: "left" }}
           id="scrollable-content"
         >
-          <Container style={{ float: "left" }}>
-            <ReactQuill
-              className="quill-container"
-              theme="snow"
-              onChange={this.handleChange}
-              value={this.state.editorHtml}
-              modules={Editor.modules}
-              formats={Editor.formats}
-              bounds={".app"}
-              placeholder={this.props.placeholder}
-            />
-          </Container>
+          {/* <Container style={{ float: "left" }}> */}
+          <ReactQuill
+            className="quill-container"
+            theme="snow"
+            onKeyPress={this.handleKeyPress}
+            onChange={this.handleChange}
+            value={this.state.editorHtml}
+            modules={Editor.modules}
+            formats={Editor.formats}
+            bounds={".app"}
+            placeholder={this.props.placeholder}
+          />
+          {/* </Container> */}
         </Container>
       </div>
     );
@@ -104,6 +109,10 @@ class InlineComment {
     this.toolbar = quill.getModule("toolbar");
     if (typeof this.toolbar != "undefined")
       this.toolbar.addHandler("comment", this.commentEventHanlder);
+    quill.keyboard.addBinding(
+      { key: "M", ctrlKey: true },
+      this.commentEventHanlder
+    );
 
     var commentBtns = document.getElementsByClassName("ql-comment");
     if (commentBtns) {
@@ -179,14 +188,6 @@ function createCommentDialog(quill) {
     const commentObj = {};
     let commentText = document.querySelector(".commentText").value;
     commentObj.comment = commentText;
-    // var commentId = 1;
-    // var commentStatus = "resolved";
-    // if (typeof commentId !== "undefined") {
-    //   commentObj.id = commentId;
-    // }
-    // if (typeof commentStatus !== "undefined") {
-    //   commentObj.resolved = commentStatus;
-    // }
     commentToolTip.remove();
     containerMask.remove();
     quill.format("comment", commentObj);
