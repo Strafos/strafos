@@ -7,24 +7,11 @@ import $ from "jquery";
 // import popup from "semantic-ui";
 // import popup from "semantic-ui-popup";
 
-import Delta from "quill";
-
 import "react-quill/dist/quill.snow.css"; // ES6
 
 import "./Quill.css";
 
-import {
-  Card,
-  Message,
-  Segment,
-  Header,
-  Divider,
-  Button,
-  Popup,
-  Grid,
-  Container,
-  TextArea,
-} from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 class Editor extends Component {
   constructor(props) {
@@ -106,14 +93,19 @@ Quill.register({
 class InlineComment {
   constructor(quill) {
     this.quill = quill;
+
+    // Attach handler to toolbar icon (that doesn't exist yet)
     this.toolbar = quill.getModule("toolbar");
     if (typeof this.toolbar != "undefined")
       this.toolbar.addHandler("comment", this.commentEventHanlder);
+
+    // Couple handler with keyboard event
     quill.keyboard.addBinding(
       { key: "M", ctrlKey: true },
       this.commentEventHanlder
     );
 
+    // Create comment icon
     var commentBtns = document.getElementsByClassName("ql-comment");
     if (commentBtns) {
       [].slice.call(commentBtns).forEach(function(commentBtn) {
@@ -133,6 +125,8 @@ function checkDialogExist(quill) {
   let commentToolTip = document.getElementById("inline-comment");
   let commentMask = document.getElementById("inline-comment-mask");
   if (commentToolTip) {
+    // This only handles case where a dialog box is open
+    // We need to handle the case where a comment is written
     commentToolTip.remove();
     commentMask.remove();
   } else {
@@ -140,6 +134,7 @@ function checkDialogExist(quill) {
   }
 }
 
+// Opens up a small dialog box to write a comment
 function createCommentDialog(quill) {
   let range = quill.getSelection();
   let text = quill.getText(range.index, range.length);
@@ -174,14 +169,7 @@ function createCommentDialog(quill) {
   container.style.zIndex = 80;
   document.querySelector(".commentText").focus();
 
-  // let inlineCancel = document.querySelector(".inline-cancel");
   let commentToolTip = document.querySelector(".inline-comment");
-
-  // inlineCancel.addEventListener("click", function() {
-  //   commentToolTip.style.display = "none";
-  //   containerMask.style.display = "none";
-  // });
-
   let inlineSend = document.querySelector(".inline-send");
 
   inlineSend.addEventListener("click", function() {
@@ -217,7 +205,7 @@ Editor.modules = {
       [{ align: [] }],
       ["clean"],
       ["link", "image", "video"],
-      ["comment"],
+      ["comment"], // Need this to add comment to toolbar
     ],
     handlers: { comment: function() {} },
   },
@@ -225,7 +213,7 @@ Editor.modules = {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
-  inline_comment: true,
+  inline_comment: true, //And this as well
 };
 
 /* 
