@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Message, Header, Divider, Button, Grid } from "semantic-ui-react";
 
 import NoteList from "./components/NoteList";
-import QuillTest from "./components/QuillTest";
+import Editor from "./components/Editor";
 
 const notes = [
   {
@@ -228,7 +228,7 @@ class App extends Component {
 
             <Grid.Column width={13}>
               <br />
-              <QuillTest note={selectedNote} />
+              <Editor note={selectedNote} />
             </Grid.Column>
           </Grid>
         </div>
