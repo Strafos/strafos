@@ -17,7 +17,7 @@
   display: none;
   z-index: 1001;
   text-align: left;
-  background: #383838;
+  background: #FFFFFF;
   border: none;
   -webkit-box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.2), 1px 3px 15px 2px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.2), 1px 3px 15px 2px rgba(0, 0, 0, 0.2);
@@ -76,14 +76,14 @@
 
 .ui.modal > .header {
   display: block;
-  font-family: 'Lato';
-  background: #383838;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  background: #FFFFFF;
   margin: 0em;
   padding: 1.25rem 1.5rem;
   -webkit-box-shadow: none;
           box-shadow: none;
-  color: #fff;
-  border-bottom: #505050;
+  color: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
 }
 .ui.modal > .header:not(.ui) {
   font-size: 1.42857143rem;
@@ -101,7 +101,7 @@
   font-size: 1em;
   line-height: 1.4;
   padding: 1.5rem;
-  background: #383838;
+  background: #FFFFFF;
 }
 .ui.modal > .image.content {
   display: -webkit-box;
@@ -169,9 +169,9 @@
 ---------------*/
 
 .ui.modal > .actions {
-  background: #383838;
+  background: #F9FAFB;
   padding: 1rem 1rem;
-  border-top: 1px solid #505050;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
   text-align: right;
 }
 .ui.modal .actions > .button {
@@ -223,7 +223,7 @@
   .ui.modal > .close {
     top: 1.0535rem;
     right: 1rem;
-    color: #888;
+    color: rgba(0, 0, 0, 0.87);
   }
 }
 
@@ -314,7 +314,7 @@
   right: 1.5rem;
 }
 .ui.inverted.dimmer > .basic.modal {
-  color: #888;
+  color: rgba(0, 0, 0, 0.87);
 }
 .ui.inverted.dimmer > .ui.basic.modal > .header {
   color: rgba(0, 0, 0, 0.85);
@@ -420,7 +420,7 @@
 .ui.fullscreen.modal > .close {
   top: 1.0535rem;
   right: 1rem;
-  color: #888;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 /*--------------
@@ -576,6 +576,12 @@
     margin: 0em 0em 0em 0em;
   }
 }
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
 
 
 /*******************************

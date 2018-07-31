@@ -18,9 +18,8 @@ import * as Showdown from "showdown";
 
 import "react-mde/lib/styles/css/react-mde-all.css";
 
+// Test with react-mde
 class NoteDisplay extends Component {
-  // componentWillReceiveProps(nextProps)
-
   constructor(props) {
     super(props);
     this.state = {

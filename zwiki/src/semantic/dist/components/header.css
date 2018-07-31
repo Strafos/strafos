@@ -19,11 +19,11 @@
   border: none;
   margin: calc(2rem -  0.14285714em ) 0em 1rem;
   padding: 0em 0em;
-  font-family: 'Lato';
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
   line-height: 1.28571429em;
   text-transform: none;
-  color: #fff;
+  color: rgba(0, 0, 0, 0.87);
 }
 .ui.header:first-child {
   margin-top: -0.14285714em;
@@ -43,7 +43,7 @@
   margin: 0em;
   font-size: 1rem;
   line-height: 1.2em;
-  color: #888;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 /*--------------
@@ -281,7 +281,7 @@ h5.ui.header .sub.header {
 *******************************/
 
 .ui.disabled.header {
-  opacity: 0.7;
+  opacity: 0.45;
 }
 
 
@@ -617,7 +617,7 @@ a.ui.inverted.grey.header:hover {
 
 .ui.dividing.header {
   padding-bottom: 0.21428571rem;
-  border-bottom: 1px solid #505050;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
 }
 .ui.dividing.header .sub.header {
   padding-bottom: 0.21428571rem;
@@ -634,11 +634,11 @@ a.ui.inverted.grey.header:hover {
 --------------------*/
 
 .ui.block.header {
-  background: #000;
+  background: #F3F4F5;
   padding: 0.78571429rem 1rem;
   -webkit-box-shadow: none;
           box-shadow: none;
-  border: 1px solid #505050;
+  border: 1px solid #D4D4D5;
   border-radius: 0.28571429rem;
 }
 .ui.tiny.block.header {
@@ -662,16 +662,16 @@ a.ui.inverted.grey.header:hover {
 --------------------*/
 
 .ui.attached.header {
-  background: #000;
+  background: #FFFFFF;
   padding: 0.78571429rem 1rem;
   margin-left: -1px;
   margin-right: -1px;
   -webkit-box-shadow: none;
           box-shadow: none;
-  border: 1px solid #505050;
+  border: 1px solid #D4D4D5;
 }
 .ui.attached.block.header {
-  background: #000;
+  background: #F3F4F5;
 }
 .ui.attached:not(.top):not(.bottom).header {
   margin-top: 0em;
@@ -713,6 +713,12 @@ a.ui.inverted.grey.header:hover {
 .ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   font-size: 1.28571429em;
 }
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
 
 
 /*******************************
