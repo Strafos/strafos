@@ -10,9 +10,9 @@ const port = process.env.PORT || 5001;
 
 // Send in URL and return HTML from readability parser
 app.post("/readerView", (req, res) => {
-  const { url } = req.body;
+  const { url, createdAt } = req.body;
   console.log(url);
-  readerView(url).then(article => res.send(article));
+  readerView(url, createdAt).then(article => res.send(article));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
