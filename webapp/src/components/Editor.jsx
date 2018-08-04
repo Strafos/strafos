@@ -1,25 +1,28 @@
 import React, { Component } from "react";
 import ReactQuill, { Quill, Mixin, Toolbar } from "react-quill"; // ES6
 import PropTypes from "prop-types";
+import { Container } from "semantic-ui-react";
 
 import "react-quill/dist/quill.snow.css"; // ES6
-
 import "./Quill.css";
-
-import { Container } from "semantic-ui-react";
 
 class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorHtml: sampleHTML.replace(/<\/p>/g, "</p><br />"),
+      // editorHtml: sampleHTML.replace(/<\/p>/g, "</p><br />"),
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleKeyPress = key => {
-    console.log(key);
-  };
+  componentWillReceiveProps(nextProps) {
+    const { title, content } = nextProps;
+    console.log(title);
+    this.setState({
+      editorHtml: content.replace(/<\/p>/g, "</p><br />"),
+      // editorHtml: content,
+    });
+  }
 
   handleChange(content, delta, source, editor) {
     this.setState({ editorHtml: content });
@@ -34,19 +37,19 @@ class Editor extends Component {
           style={{ float: "left" }}
           id="scrollable-content"
         >
-          {/* <Container style={{ float: "left" }}> */}
-          <ReactQuill
-            className="quill-container"
-            theme="snow"
-            onKeyPress={this.handleKeyPress}
-            onChange={this.handleChange}
-            value={this.state.editorHtml}
-            modules={Editor.modules}
-            formats={Editor.formats}
-            bounds={".app"}
-            placeholder={this.props.placeholder}
-          />
-          {/* </Container> */}
+          <Container style={{ float: "left" }}>
+            <ReactQuill
+              className="quill-container"
+              theme="snow"
+              onKeyPress={this.handleKeyPress}
+              onChange={this.handleChange}
+              value={this.state.editorHtml}
+              modules={Editor.modules}
+              formats={Editor.formats}
+              bounds={".app"}
+              placeholder={this.props.placeholder}
+            />
+          </Container>
         </Container>
       </div>
     );

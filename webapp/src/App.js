@@ -2,10 +2,65 @@ import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import { Message, Header, Divider, Button, Grid } from "semantic-ui-react";
+import {
+  Menu,
+  Message,
+  Header,
+  Divider,
+  Button,
+  Input,
+  Grid,
+} from "semantic-ui-react";
 
 import NoteList from "./components/NoteList";
 import Editor from "./components/Editor";
+import NavBar from "./components/NavBar";
+
+class App extends Component {
+  state = {
+    selectedNote: notes[0],
+    // selectedNote: null,
+    articleTitle: null,
+    articleContent: null,
+  };
+
+  onWebClip = (title, content) => {
+    this.setState({
+      articleTitle: title,
+      articleContent: content,
+    });
+  };
+
+  handleSelectedNote = selectedNote => {
+    this.setState({
+      selectedNote,
+    });
+  };
+
+  render() {
+    const { articleContent, articleTitle } = this.state;
+
+    return (
+      <Router>
+        <div className="App">
+          <NavBar onClip={this.onWebClip} />
+          <Grid columns={1} divided>
+            <Grid.Column width={3}>
+              <NoteList notes={notes} onNoteSelect={this.handleSelectedNote} />
+            </Grid.Column>
+
+            <Grid.Column width={13}>
+              <br />
+              <Editor title={articleTitle} content={articleContent} />
+            </Grid.Column>
+          </Grid>
+        </div>
+      </Router>
+    );
+  }
+}
+
+export default App;
 
 const notes = [
   {
@@ -202,39 +257,3 @@ _Kevin Berger is the features editor at_ Nautilus.`,
     date: new Date().toLocaleDateString(),
   },
 ];
-
-class App extends Component {
-  state = {
-    selectedNote: notes[0],
-    // selectedNote: null,
-  };
-
-  handleSelectedNote = selectedNote => {
-    this.setState({
-      selectedNote,
-    });
-  };
-
-  render() {
-    const { selectedNote } = this.state;
-
-    return (
-      <Router>
-        <div className="App">
-          <Grid columns={1} divided>
-            <Grid.Column width={3}>
-              <NoteList notes={notes} onNoteSelect={this.handleSelectedNote} />
-            </Grid.Column>
-
-            <Grid.Column width={13}>
-              <br />
-              <Editor note={selectedNote} />
-            </Grid.Column>
-          </Grid>
-        </div>
-      </Router>
-    );
-  }
-}
-
-export default App;
