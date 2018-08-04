@@ -3,7 +3,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const readerView = require("./readerView");
-console.log(readerView);
 
 const app = express();
 app.use(bodyParser.json());

@@ -17,12 +17,11 @@ function getReaderView(url) {
       }
       const dom = new JSDOM(body);
       const article = new Readability(dom.window.document).parse();
-      resolve({ title: article.title, content: article.content });
+      const content = Buffer.from(article.content).toString("base64");
+      resolve({ title: article.title, content });
     });
   });
 }
-
-// getReaderView("http://www.google.com").then(a => console.log(a));
 
 if (typeof module === "object") {
   module.exports = getReaderView;
