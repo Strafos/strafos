@@ -2,14 +2,7 @@ import React, { Component } from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./NoteList.css";
 
-import {
-  Message,
-  Header,
-  Divider,
-  Button,
-  Grid,
-  Container,
-} from "semantic-ui-react";
+import { Divider, Container } from "semantic-ui-react";
 
 import NotePreview from "./NotePreview";
 
@@ -23,7 +16,7 @@ class NoteList extends Component {
         <NotePreview
           title={note.title}
           date={note.date}
-          content={note.content}
+          content={note.preview}
         />
         <Divider />
       </Container>

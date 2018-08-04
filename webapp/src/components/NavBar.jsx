@@ -1,17 +1,8 @@
 import React, { Component } from "react";
-import "./NoteList.css";
 
-import {
-  Message,
-  Header,
-  Divider,
-  Icon,
-  Menu,
-  Input,
-  Container,
-} from "semantic-ui-react";
+import { Menu, Input } from "semantic-ui-react";
 
-import { webClip } from "../utils/api/api";
+import * as API from "../utils/api";
 
 class NavBar extends Component {
   state = {
@@ -32,10 +23,9 @@ class NavBar extends Component {
     const { urlClip } = this.state;
     console.log(urlClip);
     if (urlClip) {
-      webClip(urlClip).then(article => {
-        this.props.onClip(article.title, atob(article.content));
-        // console.log(title);
-        // console.log(atob(content));
+      API.webClip(urlClip).then(article => {
+        this.props.onClip(article.title, article.content);
+        // this.props.onClip(article.title, atob(article.content));
       });
     }
   };
@@ -63,16 +53,13 @@ class NavBar extends Component {
         />
         <Menu.Item>
           <Input
-            placeholder="Add todo..."
+            placeholder="Clip article..."
             action={{
               icon: "cut",
               onClick: this.handleSubmit,
             }}
             onChange={this.handleUrlChange}
             onKeyPress={this.handleEnter}
-            // value={this.state.newTodo}
-            // size="small"
-            // inverted
           />
         </Menu.Item>
         <Menu.Menu position="right">
