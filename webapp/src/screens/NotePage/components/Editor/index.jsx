@@ -15,7 +15,7 @@ class Editor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { title, content } = nextProps;
+    const { content } = nextProps;
     this.setState({
       editorHtml: content.replace(/<\/p>/g, "</p><br />"),
     });
@@ -91,7 +91,7 @@ class InlineComment {
 
     // Attach handler to toolbar icon (that doesn't exist yet)
     this.toolbar = quill.getModule("toolbar");
-    if (typeof this.toolbar != "undefined")
+    if (typeof this.toolbar !== "undefined")
       this.toolbar.addHandler("comment", this.commentEventHanlder);
 
     // Couple handler with keyboard event
@@ -188,16 +188,17 @@ Editor.modules = {
   toolbar: {
     container: [
       ["bold", "italic", "underline", "strike"],
-      ["blockquote", "code-block"],
+      ["blockquote"],
+      // ["blockquote", "code-block"],
       [{ header: 1 }, { header: 2 }],
       [{ list: "ordered" }, { list: "bullet" }],
-      [{ script: "sub" }, { script: "super" }],
+      // [{ script: "sub" }, { script: "super" }],
       [{ indent: "-1" }, { indent: "+1" }],
       [{ direction: "rtl" }],
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ color: [] }, { background: [] }],
+      // [{ color: [] }, { background: [] }],
       [{ font: [] }],
-      [{ align: [] }],
+      // [{ align: [] }],
       ["clean"],
       ["link", "image", "video"],
       ["comment"], // Need this to add comment to toolbar

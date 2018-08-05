@@ -9,12 +9,7 @@ import NoteList from "./components/NoteList";
 import Editor from "./components/Editor/index";
 
 class NotePage extends Component {
-  state = {
-    selectedNote: null,
-    articleTitle: null,
-    articleContent: null,
-    articles: [],
-  };
+  state = {};
 
   componentDidMount() {
     this.props.getAllNotes();
@@ -35,14 +30,12 @@ class NotePage extends Component {
 
   render() {
     const { articleContent, articleTitle } = this.state;
+    const { noteList } = this.props;
 
     return (
       <Grid columns={1} divided>
         <Grid.Column width={3}>
-          <NoteList
-            notes={this.state.articles}
-            onNoteSelect={this.handleSelectedNote}
-          />
+          <NoteList notes={noteList} onNoteSelect={this.handleSelectedNote} />
         </Grid.Column>
 
         <Grid.Column width={13}>

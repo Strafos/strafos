@@ -19,13 +19,14 @@ function getReaderView(url, createdAt) {
       const dom = new JSDOM(body);
       const article = new Readability(dom.window.document).parse();
       // const content = Buffer.from(article.content).toString("base64");
-      const query = `INSERT INTO articles values(null, (?), (?), (?), (?), (?))`;
+      const query = `INSERT INTO articles values(null, (?), (?), (?), (?), (?), (?))`;
       db.insert(query, [
         url,
         article.title,
         article.content,
         createdAt,
         createdAt,
+        article.excerpt,
       ])
         .then(() => {
           // resolve({ title: article.title, content });

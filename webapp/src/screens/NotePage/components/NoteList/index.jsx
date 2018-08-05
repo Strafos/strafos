@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./NoteList.css";
 
-import { Divider, Container } from "semantic-ui-react";
+import { Divider, Container, Loader } from "semantic-ui-react";
 
 import NotePreview from "./NotePreview";
 
@@ -25,6 +25,10 @@ class NoteList extends Component {
 
   render() {
     const { notes } = this.props;
+    if (!notes) {
+      return <Loader />;
+    }
+
     return (
       <Container style={{ paddingLeft: "10px", paddingTop: "5px" }}>
         <div id="scrollable-content">

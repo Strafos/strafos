@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import {
-  Card,
-  Message,
-  Segment,
-  Header,
-  Divider,
-  Button,
-  Grid,
-  Container,
-} from "semantic-ui-react";
+import { Header, Container } from "semantic-ui-react";
 
 class NoteList extends Component {
   state = {};
