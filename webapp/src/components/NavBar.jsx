@@ -25,14 +25,12 @@ class NavBar extends Component {
     if (urlClip) {
       API.webClip(urlClip).then(article => {
         this.props.onClip(article.title, article.content);
-        // this.props.onClip(article.title, atob(article.content));
       });
     }
   };
 
   render() {
     const { activeItem } = this.state;
-    console.log(this.state.urlClip);
 
     return (
       <Menu>

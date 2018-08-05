@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import { Grid } from "semantic-ui-react";
 
+import * as ActionCreators from "./notePageActions";
+
 import NoteList from "./components/NoteList";
 import Editor from "./components/Editor/index";
-import { getArticles } from "../../utils/api";
 
 class NotePage extends Component {
   state = {
@@ -15,7 +17,7 @@ class NotePage extends Component {
   };
 
   componentDidMount() {
-    getArticles().then(articles => this.setState({ articles }));
+    this.props.getAllNotes();
   }
 
   onWebClip = (title, content) => {
@@ -33,7 +35,6 @@ class NotePage extends Component {
 
   render() {
     const { articleContent, articleTitle } = this.state;
-    console.log(this.state.articles);
 
     return (
       <Grid columns={1} divided>
@@ -53,4 +54,15 @@ class NotePage extends Component {
   }
 }
 
-export default NotePage;
+const mapStateToProps = state => ({
+  noteList: state.notePage.noteList.data,
+});
+
+const mapDispatchToProps = {
+  getAllNotes: ActionCreators.getAllNotes,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NotePage);

@@ -17,6 +17,7 @@ const configureStore = initState => {
     initState,
     composeEnhancers(applyMiddleware(...middlewares))
   );
+  return store;
 };
 
 export default configureStore;
