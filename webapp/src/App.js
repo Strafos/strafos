@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Segment } from "semantic-ui-react";
 
 import NotePage from "./screens/NotePage";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 
 class App extends Component {
   render() {

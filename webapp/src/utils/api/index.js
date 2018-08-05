@@ -1,2 +1,1 @@
-export * from "./webClip";
-export * from "./api";
+export * from "./articles";

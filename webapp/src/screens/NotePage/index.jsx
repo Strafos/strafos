@@ -4,33 +4,36 @@ import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
 
 import * as ActionCreators from "./notePageActions";
+import * as CommonActions from "../../commonActions";
 
 import NoteList from "./components/NoteList";
 import Editor from "./components/Editor/index";
 
 class NotePage extends Component {
-  state = {};
+  state = { selectedNote: null };
 
   componentDidMount() {
     this.props.getAllNotes();
   }
 
-  onWebClip = (title, content) => {
-    this.setState({
-      articleTitle: title,
-      articleContent: content,
-    });
-  };
-
-  handleSelectedNote = selectedNote => {
+  onWebClip = selectedNote => {
     this.setState({
       selectedNote,
     });
   };
 
-  render() {
-    const { articleContent, articleTitle } = this.state;
+  handleSelectedNote = noteId => {
     const { noteList } = this.props;
+    this.setState({
+      selectedNote: noteList.find(note => note.id === noteId),
+    });
+  };
+
+  render() {
+    const { selectedNote } = this.state;
+    const { noteList } = this.props;
+
+    console.log(selectedNote);
 
     return (
       <Grid columns={1} divided>
@@ -40,7 +43,7 @@ class NotePage extends Component {
 
         <Grid.Column width={13}>
           <br />
-          <Editor title={articleTitle || ""} content={articleContent || ""} />
+          <Editor selectedNote={selectedNote} />
         </Grid.Column>
       </Grid>
     );
@@ -49,6 +52,7 @@ class NotePage extends Component {
 
 const mapStateToProps = state => ({
   noteList: state.notePage.noteList.data,
+  selectedNote: state.notePage.noteList.data && state.notePage.noteList.data[0],
 });
 
 const mapDispatchToProps = {

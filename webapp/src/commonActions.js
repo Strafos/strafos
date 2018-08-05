@@ -1,8 +1,8 @@
-import { asyncActionCreator } from "../../utils/reduxUtils";
+import { asyncActionCreator } from "./utils/reduxUtils";
 
-import * as ActionTypes from "./notePageConstants";
+import * as ActionTypes from "./commonConstants";
 
-import * as API from "../../utils/api";
+import * as API from "./utils/api";
 
 export const getAllNotes = () =>
   asyncActionCreator(
@@ -23,13 +23,3 @@ export const createArticle = url =>
     },
     API.createArticle
   )(url);
-
-export const updateArticle = (id, requestObj) =>
-  asyncActionCreator(
-    {
-      pending: ActionTypes.UPDATE_ARTICLE_REQUEST,
-      complete: ActionTypes.UPDATE_ARTICLE_SUCCESS,
-      error: ActionTypes.UPDATE_ARTICLE_FAILURE,
-    },
-    API.updateArticle
-  )(id, requestObj);

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import ReactQuill, { Quill } from "react-quill"; // ES6
 // import ReactQuill, { Quill, Mixin, Toolbar } from "react-quill"; // ES6
 import PropTypes from "prop-types";
-import { Container } from "semantic-ui-react";
+import { Container, Button, Divider } from "semantic-ui-react";
+
+import * as ActionCreators from "../../notePageActions";
 
 import "react-quill/dist/quill.snow.css"; // ES6
 import "./Editor.css";
@@ -15,11 +18,28 @@ class Editor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { content } = nextProps;
+    const { selectedNote } = nextProps;
+    console.log(
+      selectedNote && selectedNote.content.replace(/<\/p>/g, "</p><br />")
+    );
     this.setState({
-      editorHtml: content.replace(/<\/p>/g, "</p><br />"),
+      selectedNote,
+      // Add a new line between each paragraph
+      editorHtml:
+        selectedNote && selectedNote.content.replace(/<\/p>/g, "</p><br />"),
     });
   }
+
+  handleSave = () => {
+    const { editorHtml, selectedNote } = this.state;
+    console.log(editorHtml);
+    console.log(editorHtml.replace(/<\/p><br \/>/g, "</p>"));
+    const requestObj = {
+      updatedAt: new Date().toISOString(),
+      content: editorHtml.replace(/<p><br><\/p>/g, ""),
+    };
+    this.props.updateArticle(selectedNote.id, requestObj);
+  };
 
   handleChange(content, delta, source, editor) {
     this.setState({ editorHtml: content });
@@ -28,6 +48,21 @@ class Editor extends Component {
   render() {
     return (
       <div>
+        <Button onClick={this.handleSave}>Save</Button>
+        <Button
+          disabled={!this.state.selectedNote}
+          floated="right"
+          onClick={this.handleSave}
+        >
+          Save
+        </Button>
+        <Button
+          disabled={!this.state.selectedNote}
+          floated="right"
+          onClick={this.handleDelete}
+        >
+          Delete
+        </Button>
         <Container
           onScroll={() => window.refreshPopup()}
           fluid
@@ -35,6 +70,7 @@ class Editor extends Component {
           id="scrollable-content"
         >
           <Container style={{ float: "left" }}>
+            <Divider />
             <ReactQuill
               className="quill-container"
               theme="snow"
@@ -234,11 +270,13 @@ Editor.formats = [
   "comment",
 ];
 
-/* 
- * PropType validation
- */
-Editor.propTypes = {
-  placeholder: PropTypes.string,
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  updateArticle: ActionCreators.updateArticle,
 };
 
-export default Editor;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Editor);

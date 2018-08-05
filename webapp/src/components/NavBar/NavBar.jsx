@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import { Menu, Input } from "semantic-ui-react";
 
-import * as API from "../utils/api";
+import * as CommonActions from "../../commonActions";
 
 class NavBar extends Component {
   state = {
@@ -11,6 +12,7 @@ class NavBar extends Component {
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
   handleUrlChange = (e, { value }) => this.setState({ urlClip: value });
 
   handleEnter = e => {
@@ -21,11 +23,8 @@ class NavBar extends Component {
 
   handleSubmit = () => {
     const { urlClip } = this.state;
-    console.log(urlClip);
     if (urlClip) {
-      API.webClip(urlClip).then(article => {
-        this.props.onClip(article.title, article.content);
-      });
+      this.props.createArticle(urlClip);
     }
   };
 
@@ -75,4 +74,14 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = state => ({});
+
+//Unsure if getting articles should be a common action
+const mapDispatchToProps = {
+  createArticle: CommonActions.createArticle,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar);
