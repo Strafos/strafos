@@ -29,6 +29,31 @@ const insert = (query, params) => {
 };
 
 /**
+ * insert() handles all the non-select database queries
+ * returns Promise with the query
+ * Most frontend API calls don't care what is returned,
+ * but some check that the API was successful
+ */
+const insertReturning = (insert, select, params) => {
+  return new Promise((resolve, reject) => {
+    db.all(insert, params, (err, res) => {
+      if (err) {
+        console.error(err.message);
+        reject(err);
+      }
+      db.all(select, (err, res) => {
+        if (err) {
+          console.error(err.message);
+          reject(err);
+        }
+        console.log(res);
+        resolve(res);
+      });
+    });
+  });
+};
+
+/**
  * Handle any SELECT queries on database
  * returns a Promise obj with data
  */
@@ -47,4 +72,5 @@ const read = async query => {
 module.exports = {
   insert: insert,
   read: read,
+  insertReturning: insertReturning,
 };

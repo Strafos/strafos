@@ -18,9 +18,9 @@ function getReaderView(url, createdAt) {
       }
       const dom = new JSDOM(body);
       const article = new Readability(dom.window.document).parse();
-      // const content = Buffer.from(article.content).toString("base64");
-      const query = `INSERT INTO articles values(null, (?), (?), (?), (?), (?), (?))`;
-      db.insert(query, [
+      const insert = `INSERT INTO articles values(null, (?), (?), (?), (?), (?), (?))`;
+      const select = `SELECT * FROM articles WHERE id in (SELECT last_insert_rowid());`;
+      db.insertReturning(insert, select, [
         url,
         article.title,
         article.content,
@@ -28,9 +28,8 @@ function getReaderView(url, createdAt) {
         createdAt,
         article.excerpt,
       ])
-        .then(() => {
-          // resolve({ title: article.title, content });
-          resolve({ title: article.title, content: article.content });
+        .then(response => {
+          resolve(response);
         })
         .catch(err => {
           resolve({ status: "Failure" });
