@@ -33,3 +33,13 @@ export const updateArticle = (id, requestObj) =>
     },
     API.updateArticle
   )(id, requestObj);
+
+export const deleteArticle = id =>
+  asyncActionCreator(
+    {
+      pending: ActionTypes.DELETE_ARTICLE_REQUEST,
+      complete: ActionTypes.DELETE_ARTICLE_SUCCESS,
+      error: ActionTypes.DELETE_ARTICLE_FAILURE,
+    },
+    API.deleteArticle
+  )(id);

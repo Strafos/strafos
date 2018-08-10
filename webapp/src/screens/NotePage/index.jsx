@@ -7,7 +7,13 @@ import * as ActionCreators from "./notePageActions";
 import * as CommonActions from "../../commonActions";
 
 import NoteList from "./components/NoteList";
-import Editor from "./components/Editor/index";
+import Editor from "./components/Editor/Editor";
+
+const sortNotes = (noteA, noteB) => {
+  const timeA = new Date(noteA.updated_at).getTime();
+  const timeB = new Date(noteB.updated_at).getTime();
+  return timeB - timeA;
+};
 
 class NotePage extends Component {
   state = { selectedNote: null };
@@ -33,7 +39,7 @@ class NotePage extends Component {
     const { selectedNote } = this.state;
     const { noteList } = this.props;
 
-    console.log(selectedNote);
+    noteList && noteList.sort(sortNotes);
 
     return (
       <Grid columns={1} divided>
@@ -43,7 +49,7 @@ class NotePage extends Component {
 
         <Grid.Column width={13}>
           <br />
-          <Editor selectedNote={selectedNote} />
+          <Editor selectedNote={selectedNote || (noteList && noteList[0])} />
         </Grid.Column>
       </Grid>
     );

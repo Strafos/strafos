@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { Menu, Input } from "semantic-ui-react";
 
@@ -7,7 +8,7 @@ import * as CommonActions from "../../commonActions";
 
 class NavBar extends Component {
   state = {
-    activeItem: "home",
+    activeItem: "articles",
     urlClip: null,
   };
 
@@ -34,14 +35,16 @@ class NavBar extends Component {
     return (
       <Menu>
         <Menu.Item
-          name="home"
-          active={activeItem === "home"}
+          name="articles"
+          active={activeItem === "articles"}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name="messages"
-          active={activeItem === "messages"}
+          name="dashboard"
+          active={activeItem === "dashboard"}
           onClick={this.handleItemClick}
+          as={Link}
+          to="/dashboard"
         />
         <Menu.Item
           name="friends"

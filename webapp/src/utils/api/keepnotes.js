@@ -1,7 +1,7 @@
 // API calls
 
-export const getArticles = async () => {
-  const response = await fetch("/articles", {
+export const getKeepnotes = async () => {
+  const response = await fetch("/keepnotes", {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -15,14 +15,14 @@ export const getArticles = async () => {
   return body;
 };
 
-export const createArticle = async url => {
-  const response = await fetch("/article", {
+export const createKeepnote = async requestObj => {
+  const response = await fetch("/keepnote", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ url, createdAt: new Date().toISOString() }),
+    body: JSON.stringify(requestObj),
   });
   const body = await response.json();
 
@@ -31,8 +31,8 @@ export const createArticle = async url => {
   return body;
 };
 
-export const updateArticle = async (id, requestObj) => {
-  const response = await fetch(`/article/${id}`, {
+export const updateKeepnote = async (id, requestObj) => {
+  const response = await fetch(`/keepnote/${id}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -47,8 +47,8 @@ export const updateArticle = async (id, requestObj) => {
   return body;
 };
 
-export const deleteArticle = async id => {
-  const response = await fetch(`/article/${id}`, {
+export const deleteKeepnote = async id => {
+  const response = await fetch(`/keepnote/${id}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",

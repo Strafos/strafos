@@ -1,0 +1,40 @@
+.ql-editor {
+  font-size: 20px;
+}
+
+/* Specify our own scrolling container */
+/* .scrolling-container {
+  height: 100%;
+  min-height: 100%;
+  overflow-y: auto;
+} */
+
+#scrollable-content {
+  height: 96vh;
+  overflow: auto;
+}
+
+.inline-comment {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px #ddd;
+  color: #444;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+.commentText {
+  border: none;
+  display: block;
+  resize: none;
+}
+.commentText:focus {
+  outline: none;
+}
+.inline-comment-bottom {
+  margin-top: 15px;
+  text-align: right;
+}
+
+span.ui {
+  background: #a5caf2;
+}

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ReactQuill, { Quill } from "react-quill"; // ES6
 // import ReactQuill, { Quill, Mixin, Toolbar } from "react-quill"; // ES6
 import PropTypes from "prop-types";
-import { Container, Button, Divider } from "semantic-ui-react";
+import { Container, Button, Divider, Header } from "semantic-ui-react";
 
 import * as ActionCreators from "../../notePageActions";
 
@@ -19,9 +19,7 @@ class Editor extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { selectedNote } = nextProps;
-    console.log(
-      selectedNote && selectedNote.content.replace(/<\/p>/g, "</p><br />")
-    );
+    console.log(selectedNote);
     this.setState({
       selectedNote,
       // Add a new line between each paragraph
@@ -33,12 +31,16 @@ class Editor extends Component {
   handleSave = () => {
     const { editorHtml, selectedNote } = this.state;
     console.log(editorHtml);
-    console.log(editorHtml.replace(/<\/p><br \/>/g, "</p>"));
     const requestObj = {
       updatedAt: new Date().toISOString(),
+      // Remove the <br> that we added for display
       content: editorHtml.replace(/<p><br><\/p>/g, ""),
     };
     this.props.updateArticle(selectedNote.id, requestObj);
+  };
+
+  handleDelete = () => {
+    this.props.deleteArticle(this.state.selectedNote.id);
   };
 
   handleChange(content, delta, source, editor) {
@@ -46,21 +48,14 @@ class Editor extends Component {
   }
 
   render() {
+    const { selectedNote } = this.state;
     return (
       <div>
-        <Button onClick={this.handleSave}>Save</Button>
-        <Button
-          disabled={!this.state.selectedNote}
-          floated="right"
-          onClick={this.handleSave}
-        >
+        <Header as="h1">{selectedNote && selectedNote.title}</Header>
+        <Button disabled={!selectedNote} onClick={this.handleSave}>
           Save
         </Button>
-        <Button
-          disabled={!this.state.selectedNote}
-          floated="right"
-          onClick={this.handleDelete}
-        >
+        <Button disabled={!selectedNote} onClick={this.handleDelete}>
           Delete
         </Button>
         <Container
@@ -80,7 +75,6 @@ class Editor extends Component {
               modules={Editor.modules}
               formats={Editor.formats}
               bounds={".app"}
-              placeholder={this.props.placeholder}
             />
           </Container>
         </Container>
@@ -274,6 +268,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {
   updateArticle: ActionCreators.updateArticle,
+  deleteArticle: ActionCreators.deleteArticle,
 };
 
 export default connect(
